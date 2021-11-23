@@ -7,8 +7,10 @@ from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
 from PyQt5.QtWidgets import QInputDialog
 import PyQt5.uic
 
+from main_ui import Ui_Form as WindowUI
 
-class MyWindow(QWidget):
+
+class MyWindow(QWidget, WindowUI):
     def paint(self):
         self.do_paint = True
         self.repaint()
@@ -16,7 +18,8 @@ class MyWindow(QWidget):
     def __init__(self):
         super().__init__()
         # self.initUI()
-        PyQt5.uic.loadUi("UI.ui", self)
+        # PyQt5.uic.loadUi("UI.ui", self)
+        self.setupUi(self)
         self.do_paint = False
 
         # def t(s):
@@ -30,10 +33,11 @@ class MyWindow(QWidget):
             # Начинаем процесс рисования
             qp.begin(self)
             # self.draw_flag(qp)
-            qp.setPen(QColor(125, 175, 200))
-            qp.setBrush(QColor(230, 230, 100))
+            color = QColor(random.randint(0, 256), random.randint(0, 256), random.randint(0, 256))
+            qp.setPen(color)
+            qp.setBrush(color)
             r = random.randint(50, 200) * 1.0
-            qp.drawEllipse(QRectF(100.0, 100.0, r, r))
+            qp.drawEllipse(QRectF(50.0, 70.0, r, r))
             # Завершаем рисование
             qp.end()
             self.do_paint = False
